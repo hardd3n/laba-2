@@ -1,0 +1,144 @@
+import numpy as np
+
+print('Доступные функции: "транспонирование", "умножение", "ранг"');
+print()
+function = input('Выберите функцию:')
+while function not in ('транспонирование', 'умножение', 'ранг'):
+    function = input('Функции не существует')
+print()
+
+if function in ('транспонирование', 'ранг'):
+    v = int(input('Введите кол-во строк матрицы (1 - 3): '))
+    while v < 1 or v > 3:
+        v = int(input('Введено неправильное количество строк'))
+    stolbik = int(input('Введите количество столбцов  (1 - 3): '))
+    while stolbik < 1 or stolbik > 3:
+        stolbik = int(input('Введено неправильное количество столбцов'))
+    print()
+    matrix = []
+    strochka = 1
+    for i in range(v):
+        print('Введите', stolbik, 'элемент', strochka, 'строки через пробел')
+        row = input().split()
+        while len(row) < stolbik:
+            print('В данной строке кол-во элементов меньше', stolbik, ', введите строку ещё раз: ')
+            row = input().split()
+            while len(row) > stolbik:
+                print('В данной строке количество элементов больше', stolbik, )
+                row = input().split()
+        while len(row) > stolbik:
+            print('В данной строке кол-во элементов больше', stolbik, ', введите строку ещё раз: ')
+            row = input().split()
+            while len(row) < stolbik:
+                print('В данной строке кол-во элементов меньше', stolbik, ', введите строку ещё раз: ')
+                row = input().split()
+        strochka += 1
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        matrix.append(row)
+    print();
+    print('Матрица: ');
+    print(np.array(matrix));
+    print()
+
+    if function in ('транспонирование'):
+        trans = np.transpose(matrix)
+        print('Транспонированная матрица: ');
+        print(trans)
+
+    if function in ('ранг'):
+        rang = np.linalg.matrix_rank(matrix)
+        print('Ранг данной матрицы равен:', rang)
+
+if function in ('умножение'):
+    v = int(input('Введите кол-во строк матрицы A (1 - 3): '))
+    while v < 1 or v > 3:
+        v = int(input('Введено неправильное количество строк'))
+    stolbik = int(input('Введите количество столбцов матрицы A (1 - 3): '))
+    while stolbik < 1 or stolbik > 3:
+        stolbik = int(input('Введено неправильное количество столбцов'))
+    print()
+
+    v2 = int(input('Введите количество строк матрицы B (1 - 3): '))
+    while v2 < 1 or v2 > 3:
+        v2 = int(input('Введено неправильное количество строк'))
+    stolbik2 = int(input('Введите количество столбцов матрицы B (1 - 3): '))
+    while stolbik2 < 1 or stolbik2 > 3:
+        stolbik2 = int(input('Введено неправильное количество столбцов'))
+    print()
+
+    while stolbik != v2:
+        print(
+            'Невозможно выполнить умножение матриц - количество столбцов матрицы A должно совпадать с количеством строк матрицы B');
+        print()
+        v = int(input('Введите кол-во строк матрицы A (1 - 3): '))
+        while v < 1 or v > 3:
+            v = int(input('Введено некорректное кол-во строк, введите значение ещё раз: '))
+        stolbik = int(input('Введите кол-во столбцов матрицы A (1 - 3): '))
+        while stolbik < 1 or stolbik > 3:
+            stolbik = int(input('Введено некорректное кол-во столбцов, введите значение ещё раз: '))
+        print()
+
+        v2 = int(input('Введите кол-во строк матрицы B (1 - 3): '))
+        while v2 < 1 or v2 > 3:
+            v2 = int(input('Введено неправильное количество строк'))
+        stolbik2 = int(input('Введите количество столбцов матрицы B (1 - 3): '))
+        while stolbik2 < 1 or stolbik2 > 3:
+            stolbik2 = int(input('Введено некорректное кол-во столбцов, введите значение ещё раз: '))
+        print()
+
+    matrix = []
+    strochka = 1
+    for i in range(v):
+        print('Введите', stolbik, 'элемент(а)', strochka, '-ой строки через пробел: ')
+        row = input().split()
+        while len(row) < stolbik:
+            print('В данной строке кол-во элементов меньше', stolbik, ', введите строку ещё раз: ')
+            row = input().split()
+            while len(row) > stolbik:
+                print('В данной строке кол-во элементов больше', stolbik, ', введите строку ещё раз: ')
+                row = input().split()
+        while len(row) > stolbik:
+            print('В данной строке кол-во элементов больше', stolbik, ', введите строку ещё раз: ')
+            row = input().split()
+            while len(row) < stolbik:
+                print('В данной строке кол-во элементов меньше', stolbik, ', введите строку ещё раз: ')
+                row = input().split()
+        strochka += 1
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        matrix.append(row)
+    print();
+    print('Матрица A:');
+    print(np.array(matrix));
+    print()
+
+    matrix2 = []
+    stroki2 = 1
+    for j in range(v2):
+        print('Введите', stolbik2, 'элемент(а)', stroki2, '-ой строки через пробел: ')
+        row2 = input().split()
+        while len(row2) < stolbik2:
+            print('В данной строке кол-во элементов меньше', stolbik2, ', введите строку ещё раз: ')
+            row2 = input().split()
+            while len(row2) > stolbik2:
+                print('В данной строке кол-во элементов больше', stolbik2, ', введите строку ещё раз: ')
+                row2 = input().split()
+        while len(row2) > stolbik2:
+            print('В данной строке кол-во элементов больше', stolbik2, ', введите строку ещё раз: ')
+            row2 = input().split()
+            while len(row2) < stolbik2:
+                print('В данной строке кол-во элементов меньше', stolbik2, ', введите строку ещё раз: ')
+                row2 = input().split()
+        stroki2 += 1
+        for j in range(len(row2)):
+            row2[j] = int(row2[j])
+        matrix2.append(row2)
+    print();
+    print('Матрица B:');
+    print(np.array(matrix2));
+    print()
+
+    umnozhenie = np.dot(matrix, matrix2)
+    print('Произведение матриц A и B: ');
+    print(umnozhenie)
